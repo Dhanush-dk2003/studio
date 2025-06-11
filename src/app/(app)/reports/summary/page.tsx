@@ -8,6 +8,7 @@ import SummaryCard from "@/components/reports/summary-card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
 import { BarChartHorizontalBig, CalendarDays, Languages, Merge, Waypoints, Loader2 } from "lucide-react";
 import type { SummaryData } from "@/types";
 import { useToast } from "@/hooks/use-toast";
@@ -162,3 +163,4 @@ export default function SummaryReportPage() {
     </ReportPageLayout>
   );
 }
+
