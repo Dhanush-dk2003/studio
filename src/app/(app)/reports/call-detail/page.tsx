@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { CalendarIcon, Filter, Languages, Hash, Smartphone, ListChecks, Loader2 } from "lucide-react";
 import { format, addDays } from "date-fns";
 import type { DateRange } from "react-day-picker";
@@ -44,7 +44,7 @@ const mockCallDetailData: CallDetailRecord[] = Array.from({ length: 25 }, (_, i)
 
 export default function CallDetailReportPage() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(initialDateRange);
-  const [language, setLanguage] = useState<string>("");
+  const [language, setLanguage] = useState<string>(""); // Default to "" for placeholder
   const [clid, setClid] = useState<string>("");
   const [nssfNumber, setNssfNumber] = useState<string>("");
   const [nssfMobile, setNssfMobile] = useState<string>("");
@@ -65,7 +65,7 @@ export default function CallDetailReportPage() {
         let match = true;
         if (dateRange?.from && new Date(record.date) < dateRange.from) match = false;
         if (dateRange?.to && new Date(record.date) > dateRange.to) match = false;
-        if (language && record.language !== language) match = false;
+        if (language && language !== "all" && record.language !== language) match = false;
         if (clid && !record.clid.includes(clid)) match = false;
         if (nssfNumber && !record.nssfNumber.includes(nssfNumber)) match = false;
         if (nssfMobile && !record.nssfMobile.includes(nssfMobile)) match = false;
@@ -138,10 +138,10 @@ export default function CallDetailReportPage() {
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="all">Any</SelectItem>
                   <SelectItem value="English">English</SelectItem>
                   <SelectItem value="Swahili">Swahili</SelectItem>
                   <SelectItem value="French">French</SelectItem>
-                  <SelectItem value="">Any</SelectItem>
                 </SelectContent>
               </Select>
             </div>
